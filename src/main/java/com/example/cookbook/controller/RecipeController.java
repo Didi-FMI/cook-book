@@ -110,7 +110,10 @@ public class RecipeController {
     }
 
     @DeleteMapping(path = "/recipe/delete")
-    public ResponseEntity<Long> deleteRecipe(long id, HttpSession session) {
+    public ResponseEntity<Long> deleteRecipe(
+            @RequestParam long id,
+            HttpSession session
+    ) {
         UserBean user = (UserBean) session.getAttribute("user");
 
         if (user != null) {
@@ -124,6 +127,22 @@ public class RecipeController {
             }
         } else {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+    }
+
+    @GetMapping(path = "/recipe/delete")
+    public boolean canDeleteRecipe(
+            @RequestParam long id,
+            HttpSession session
+    ) {
+        UserBean user = (UserBean) session.getAttribute("user");
+
+        if (user != null) {
+            RecipeBean recipe = recipeRepo.findById(id);
+
+            return user.getId() == recipe.getUser().getId();
+        } else {
+            return false;
         }
     }
 

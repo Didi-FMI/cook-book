@@ -9,12 +9,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/css/font-awesome.min.css" rel="stylesheet">
+    <link href="assets/css/fontawesome.min.css" rel="stylesheet">
     <link href="assets/css/main.css" rel="stylesheet">
 
     <script src="js/vendor/jquery/jquery-1.12.1.min.js"></script>
     <script src="js/vendor/bootstrap/bootstrap.min.js"></script>
+    <script src="js/fontawesome/all.min.js"></script>
     <script src="js/home.js"></script>
+    <script src="js/recipes.js"></script>
+    <script src="js/recipesAdditional.js"></script>
 
     <title>Cook book</title>
 </head>
@@ -74,7 +77,14 @@
                 <p id="recipe-description"></p>
             </div>
             <div class=row>
-                <button class="btn btn-light" type="button" id="btn-view-more">View more</button>
+                <div class=col-md-1>
+                        <i class="glyphicon glyphicon-star-empty" id="add-to-favourite" style="font-size: 32px;"></i>
+                        <i class="glyphicon glyphicon-star" id="remove-from-favourite" style="font-size: 32px;"></i>
+                </div>
+                <div class="col-md-11">
+                    <button class="btn btn-light" type="button" id="btn-view-more">View more</button>
+                    <button class="btn btn-danger" type="button" id="btn-delete">Delete</button>
+                </div>
             </div>
         </div>
     </div>

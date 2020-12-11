@@ -102,3 +102,21 @@ body {
     -ms-border-radius: 5px;
     margin-top: 25px;
 }
+
+.glyphicon {
+    color: gold;
+    position: absolute;
+}
+
+.glyphicon-star-empty {
+    color: gray;
+}
+
+.glyphicon-star {
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.glyphicon-star{
+    opacity: 0.5;
+}

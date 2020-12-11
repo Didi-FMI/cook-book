@@ -1,10 +1,14 @@
 package com.example.cookbook.bean;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.Set;
+import java.util.TreeSet;
 
 @Entity
 @Table(name = "user")
+@JsonIgnoreProperties({"favourites"})
 public class UserBean {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,6 +22,13 @@ public class UserBean {
 
     @Column(name = "email", nullable = false, unique = true, length = 256)
     private String email;
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "favourites",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "recipe_id")
+    )
+    private Set<RecipeBean> favourites = new TreeSet<>();
 
     @ManyToMany
     @JoinTable(name = "account_role",
@@ -69,6 +80,14 @@ public class UserBean {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Set<RecipeBean> getFavourites() {
+        return favourites;
+    }
+
+    public void setFavourites(TreeSet<RecipeBean> favourites) {
+        this.favourites = favourites;
     }
 
     public Set<RoleBean> getRoles() {

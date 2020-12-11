@@ -1,6 +1,7 @@
 package com.example.cookbook.bean;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "recipe")
@@ -113,5 +114,21 @@ public class RecipeBean {
 
     public void setUser(UserBean user) {
         this.user = user;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (!(o instanceof RecipeBean)) return false;
+
+        RecipeBean that = (RecipeBean) o;
+
+        return id == that.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
