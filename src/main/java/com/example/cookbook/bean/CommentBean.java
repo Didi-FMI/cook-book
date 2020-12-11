@@ -12,11 +12,11 @@ public class CommentBean {
     @Column(name = "content", nullable = false, length = 2048)
     private String content;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private UserBean user;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "recipe_id")
     private RecipeBean recipe;
 
