@@ -9,6 +9,10 @@ function displayRecipes(data, list, isFromFavourites) {
         recipe.find("#recipe-ingredients").text(element.ingredients)
         recipe.find("#recipe-instructions").text(element.instructions)
 
+        recipe.find("#recipe-name").click(function (){
+            window.location.href = "recipe.html?id=" + element.id;
+        })
+
         var addToFavouriteIcon = recipe.find("#add-to-favourite")
         var removeFromFavouriteIcon = recipe.find("#remove-from-favourite")
 

@@ -146,6 +146,11 @@ public class RecipeController {
         }
     }
 
+    @GetMapping(path = "/recipe/get")
+    public RecipeBean getRecipe(@RequestParam long id) {
+        return recipeRepo.findById(id);
+    }
+
     @GetMapping(path = "/recipe/cuisines")
     public List<CuisineBean> getCuisines() {
         return cuisineRepo.findAll();

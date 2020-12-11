@@ -21,6 +21,7 @@ body {
 .navbar-default {
     background: transparent;
 }
+
 .top-nav ul {
     display: inline;
 }
@@ -36,7 +37,7 @@ body {
     padding: 0;
     font-weight: 600;
     text-decoration: none;
-    text-transform:uppercase;
+    text-transform: uppercase;
     margin-left: 30px;
     font-family: 'Roboto Condensed', sans-serif;
 }
@@ -87,6 +88,17 @@ body {
     background: rgba(255, 255, 255, 0.7);
 }
 
+.recipe-name {
+    cursor: pointer;
+}
+
+.recipe-content {
+    padding: 30px;
+    background: #fff;
+    border-radius: 5px;
+    margin-top: 30px;
+}
+
 .form-group {
     margin-bottom: 30px;
 }
@@ -117,6 +129,6 @@ body {
     transition: opacity 0.2s ease-in-out;
 }
 
-.glyphicon-star{
+.glyphicon-star {
     opacity: 0.5;
 }

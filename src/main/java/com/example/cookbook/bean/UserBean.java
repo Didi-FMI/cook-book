@@ -25,8 +25,8 @@ public class UserBean {
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "favourites",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "recipe_id")
+            joinColumns = @JoinColumn(name = "user"),
+            inverseJoinColumns = @JoinColumn(name = "recipe")
     )
     private Set<RecipeBean> favourites = new TreeSet<>();
 

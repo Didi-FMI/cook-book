@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/fontawesome.min.css" rel="stylesheet">
+    <link href="assets/css/main.css" rel="stylesheet">
+
+    <script src="js/vendor/jquery/jquery-1.12.1.min.js"></script>
+    <script src="js/vendor/bootstrap/bootstrap.min.js"></script>
+    <script src="js/fontawesome/all.min.js"></script>
+    <script src="js/recipes.js"></script>
+    <script src="js/recipe.js"></script>
+    <script src="js/logout.js"></script>
+
+    <title>Cook book</title>
+</head>
+
+<body>
+<div id="header"></div>
+<div>
+    <div class="container">
+
+        <div class="d-flex justify-content-center recipe-content">
+            <div class="row p-3">
+                <div class="col-sm-4">
+                    <img class="thumbnail img-responsive" style="border-radius: 5px; width: 100%;" id="recipe-img">
+                </div>
+                <div class="col-sm-8">
+                    <div class="row">
+                        <h1 id="recipe-name"></h1>
+                    </div>
+                    <div class=row>
+                        <p id="recipe-description"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row p-5" id="more-info">
+                <div class="row" style="width: 100%; margin-left: 5px;">
+                    <div class="col-sm-6">
+                        <h4>Ingredients</h4>
+                    </div>
+                    <div class="col-sm-6">
+                        <h4>Instruction steps</h4>
+                    </div>
+                </div>
+
+                <div class="row" style="width: 100%; margin-left: 5px;">
+                    <div class="col-sm-6">
+                        <p id="recipe-ingredients"></p>
+                    </div>
+                    <div class="col-sm-6">
+                        <p id="recipe-instructions"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="breadcrumb" style="margin-top: 30px;">
+                <h4>Comments</h4>
+            </div>
+            <div>
+                <h4 id="empty-comments">There are no comments</h4>
+                <ul class="list-group" id="comments-list" style="padding: 5px; margin-top: -10px;"></ul>
+            </div>
+
+            <div class="panel panel-info" style="margin-top: 30px;">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Add comment</h3>
+                </div>
+                <div class="panel-body">
+                    <form method="GET" id="comment-post">
+                        <div>
+                            <textarea class="form-control" id="comment-content" rows="3"></textarea>
+                        </div>
+                        <div style="margin-top: 5px;">
+                            <input class="btn btn-success" type="submit" id="btn-search" value="Post">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <li class="list-group-item" id="comment-item" style="display: none;">
+        <h4 id="user-name"></h4>
+        <p id="comment"></p>
+        <button class="btn btn-danger" type="button" id="btn-delete">Delete</button>
+    </li>
+
+    <script>
+        $(function () {
+            $("#header").load("header.html");
+        });
+    </script>
+
+</body>
+
+</html>
