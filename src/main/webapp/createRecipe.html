@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/font-awesome.min.css" rel="stylesheet">
+    <link href="assets/css/main.css" rel="stylesheet">
+
+    <script src="js/vendor/jquery/jquery-1.12.1.min.js"></script>
+    <script src="js/vendor/bootstrap/bootstrap.min.js"></script>
+    <script src="js/createRecipe.js"></script>
+
+    <title>Cook book</title>
+</head>
+
+<body>
+<div id="header"></div>
+<div class="page-body">
+    <div class="container">
+        <div class="row">
+            <div class="page-content signin-content">
+                <div class="content-wrapper">
+                    <div class="content-body">
+                        <form method="POST" id="create-recipe">
+                            <h1>Add recipe</h1>
+
+                            <div class="form-group" style="margin-top: 30px">
+                                <label for="name">Name:</label>
+                                <input class="form-control" id="name" required="required" size="30" type="text">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="name">Image:</label>
+                                <input class="form-control" id="image" required="required" type="text">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="description">Description:</label>
+                                <textarea class="form-control" id="description" required="required" rows="6"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="ingredients">Ingredients:</label>
+                                <textarea class="form-control" id="ingredients" required="required" rows="6"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="instructions">Instructions:</label>
+                                <textarea class="form-control" id="instructions" required="required"
+                                          rows="6"></textarea>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group ">
+                                        <label for="cuisine">Cuisine:</label>
+                                        <div>
+                                            <select class="form-control " id="cuisine" required="required">
+                                                <option value="" hidden>Select cuisine</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="control-label" for="diet">Diet:</label>
+                                        <div>
+                                            <select class="form-control" id="diet" required="required">
+                                                <option value="" hidden>Select diet</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-footer">
+                                <input class="btn btn-lg btn-primary" id="recipe_submit" type="submit" value="Submit">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $("#header").load("header.html");
+    });
+</script>
+
+</body>
+
+</html>
