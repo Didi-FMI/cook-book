@@ -1,15 +1,4 @@
-function displayRecipes(data) {
-    var noResults = $("#no-results")
-
-    if (data.length == 0) {
-        noResults.show()
-
-        return
-    }
-
-    noResults.hide()
-
-    var recipesList = $("#recipes-list")
+function displayRecipes(data, list, isFromFavourites) {
 
     $.each(data, function (index, element) {
         var recipe = $("#recipe").clone().attr("id", element.id)
@@ -25,12 +14,12 @@ function displayRecipes(data) {
 
         setIsFavourite(element.id, addToFavouriteIcon, removeFromFavouriteIcon)
 
-        addToFavouriteIcon.click(function (){
+        addToFavouriteIcon.click(function () {
             addToFavourite(element.id, addToFavouriteIcon, removeFromFavouriteIcon)
         })
 
-        removeFromFavouriteIcon.click(function (){
-            removeFromFavourite(element.id, addToFavouriteIcon, removeFromFavouriteIcon)
+        removeFromFavouriteIcon.click(function () {
+            removeFromFavourite(element.id, addToFavouriteIcon, removeFromFavouriteIcon, isFromFavourites)
         })
 
         var viewMoreButton = recipe.find("#btn-view-more")
@@ -49,10 +38,18 @@ function displayRecipes(data) {
 
         handleDeleteVisibility(element.id, recipe.find("#btn-delete"))
 
-        recipesList.append(recipe)
+        list.append(recipe)
 
         recipe.show()
     });
+}
+
+function handleNoResultsView(data, view) {
+    if (data.length == 0) {
+        view.show()
+    } else {
+        view.hide()
+    }
 }
 
 function handleDeleteVisibility(id, removeButton) {
@@ -100,13 +97,10 @@ function setIsFavourite(id, add, remove) {
             id: id
         },
         success: function (data) {
-            if(data)
-            {
+            if (data) {
                 add.hide()
                 remove.show()
-            }
-            else
-            {
+            } else {
                 add.show()
                 remove.hide()
             }
@@ -132,7 +126,7 @@ function addToFavourite(id, add, remove) {
     })
 }
 
-function removeFromFavourite(id, add, remove) {
+function removeFromFavourite(id, add, remove, isFromFavourites) {
     $.ajax({
         url: "favourites/remove",
         method: "POST",
@@ -142,6 +136,10 @@ function removeFromFavourite(id, add, remove) {
         success: function () {
             add.show()
             remove.hide()
+
+            if (isFromFavourites) {
+                $("#favourites-list").find("#" + id).remove();
+            }
         }
     })
 }

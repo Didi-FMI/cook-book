@@ -8,9 +8,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
+import java.util.Set;
 
 @RestController
 public class FavouritesController {
@@ -24,7 +26,9 @@ public class FavouritesController {
     }
 
     @GetMapping(path = "/favourites/check")
-    public Boolean isRecipeInFavourites(long id, HttpSession session) {
+    public Boolean isRecipeInFavourites(
+            @RequestParam long id,
+            HttpSession session) {
         UserBean user = (UserBean) session.getAttribute("user");
 
         if (user != null) {
@@ -37,7 +41,9 @@ public class FavouritesController {
     }
 
     @PostMapping(path = "/favourites/add")
-    public ResponseEntity<Boolean> addToFavourite(long id, HttpSession session) {
+    public ResponseEntity<Boolean> addToFavourite(
+            @RequestParam long id,
+            HttpSession session) {
         UserBean user = (UserBean) session.getAttribute("user");
 
         if (user != null) {
@@ -58,7 +64,9 @@ public class FavouritesController {
     }
 
     @PostMapping(path = "/favourites/remove")
-    public ResponseEntity<Boolean> removeFromFavourite(long id, HttpSession session) {
+    public ResponseEntity<Boolean> removeFromFavourite(
+            @RequestParam long id,
+            HttpSession session) {
         UserBean user = (UserBean) session.getAttribute("user");
 
         if (user != null) {
@@ -75,6 +83,17 @@ public class FavouritesController {
             }
         } else {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+    }
+
+    @GetMapping(path = "/favourites/all")
+    public Set<RecipeBean> getAllFavourites(HttpSession session) {
+        UserBean user = (UserBean) session.getAttribute("user");
+
+        if (user != null) {
+            return user.getFavourites();
+        } else {
+            return null;
         }
     }
 }

@@ -1,29 +1,41 @@
 $(document).ready(function () {
-    fillCuisines()
+    requestFavourites()
+    requestMyRecipes()
 
-    fillDiets()
-
-    $('#search-form').submit(function (e) {
-        e.preventDefault();
-
-        $("#recipes-list").empty()
-
-        search()
-    });
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+        if (e.target.id == "favourite-tab") {
+            requestFavourites()
+        } else {
+            requestMyRecipes()
+        }
+    })
 });
 
-function search() {
+function requestMyRecipes() {
+    $("#recipes-list").empty()
+
     $.ajax({
-        url: "recipe/search",
+        url: "recipe/user",
         method: "GET",
-        data: {
-            name: $('#search').val(),
-            image: $('#image').val(),
-            cuisineId: $('#cuisine').val(),
-            dietId: $('#diet').val()
-        },
         success: function (data) {
-            displayRecipes(data)
+            handleNoResultsView(data, $("#no-results"))
+            displayRecipes(data, $("#recipes-list"), false)
+        },
+        fail: function () {
+            window.location.replace('error.html');
+        }
+    });
+}
+
+function requestFavourites() {
+    $("#favourites-list").empty()
+
+    $.ajax({
+        url: "favourites/all",
+        method: "GET",
+        success: function (data) {
+            handleNoResultsView(data, $("#no-favourites"))
+            displayRecipes(data, $("#favourites-list"), true)
         }
     })
 }
