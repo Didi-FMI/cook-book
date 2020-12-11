@@ -1,10 +1,15 @@
 package com.example.cookbook.bean;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.Objects;
+import java.util.Set;
+import java.util.TreeSet;
 
 @Entity
 @Table(name = "recipe")
+@JsonIgnoreProperties({"comments"})
 public class RecipeBean {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,6 +41,9 @@ public class RecipeBean {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "diet_id")
     private DietBean diet;
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL}, mappedBy = "recipe")
+    private Set<CommentBean> comments = new TreeSet<>();
 
     public RecipeBean() {
     }
@@ -114,6 +122,14 @@ public class RecipeBean {
 
     public void setUser(UserBean user) {
         this.user = user;
+    }
+
+    public Set<CommentBean> getComments() {
+        return comments;
+    }
+
+    public void setComments(Set<CommentBean> comments) {
+        this.comments = comments;
     }
 
     @Override
