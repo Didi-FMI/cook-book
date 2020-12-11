@@ -96,6 +96,19 @@ public class LoginController {
         return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
     }
 
+    @PostMapping(path = "/logout")
+    public ResponseEntity<Boolean> logout(HttpSession session) {
+
+        UserBean user = (UserBean) session.getAttribute("user");
+
+        if (user != null) {
+            session.invalidate();
+            return new ResponseEntity<>(true, HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>(false, HttpStatus.UNAUTHORIZED);
+    }
+
     private String hashPassword(String password) {
 
         StringBuilder result = new StringBuilder();
