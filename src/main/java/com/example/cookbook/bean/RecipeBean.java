@@ -18,16 +18,16 @@ public class RecipeBean {
     @Column(name = "name", nullable = false, length = 128)
     private String name;
 
-    @Column(name = "description", nullable = false, length = 1024)
+    @Column(name = "description", nullable = false, columnDefinition="VARCHAR(4000)")
     private String description;
 
     @Column(name = "image", nullable = false, length = 512)
     private String image;
 
-    @Column(name = "ingredients", nullable = false)
+    @Column(name = "ingredients", nullable = false, columnDefinition="VARCHAR(4000)")
     private String ingredients;
 
-    @Column(name = "instructions", nullable = false)
+    @Column(name = "instructions", nullable = false,  columnDefinition="VARCHAR(4000)")
     private String instructions;
 
     @ManyToOne(fetch = FetchType.EAGER)
