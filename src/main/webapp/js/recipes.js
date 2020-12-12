@@ -9,7 +9,7 @@ function displayRecipes(data, list, isFromFavourites) {
         recipe.find("#recipe-ingredients").text(element.ingredients)
         recipe.find("#recipe-instructions").text(element.instructions)
 
-        recipe.find("#recipe-name").click(function (){
+        recipe.find("#recipe-name").click(function () {
             window.location.href = "recipe.html?id=" + element.id;
         })
 

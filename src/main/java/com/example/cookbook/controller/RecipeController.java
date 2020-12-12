@@ -43,14 +43,14 @@ public class RecipeController {
         DietBean diet = dietRepo.findById(dietId);
 
         if (cuisineId == 1 && dietId == 1) {
-            return recipeRepo.findAllByNameIgnoreCase(name);
+            return recipeRepo.findAllByNameContainingIgnoreCase(name);
         } else if (dietId == 1) {
-            return recipeRepo.findAllByNameIgnoreCaseAndCuisine(name, cuisine);
+            return recipeRepo.findAllByNameContainingIgnoreCaseAndCuisine(name, cuisine);
         } else if (cuisineId == 1) {
-            return recipeRepo.findAllByNameIgnoreCaseAndDiet(name, diet);
+            return recipeRepo.findAllByNameContainingIgnoreCaseAndDiet(name, diet);
         }
 
-        return recipeRepo.findAllByNameIgnoreCaseAndCuisineAndDiet(name, cuisine, diet);
+        return recipeRepo.findAllByNameContainingIgnoreCaseAndCuisineAndDiet(name, cuisine, diet);
     }
 
     @GetMapping(path = "/recipe/user")

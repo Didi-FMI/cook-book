@@ -101,7 +101,6 @@ function handleDeleteAction(id, deleteButton) {
                 id: id
             },
             success: function (data) {
-                removeComment(id)
                 $('#' + id).remove()
 
                 if ($('#comment-item li').length == 0) {
@@ -110,10 +109,6 @@ function handleDeleteAction(id, deleteButton) {
             }
         })
     })
-}
-
-function removeComment(id) {
-    $("#comment-item")
 }
 
 function postComment(id) {

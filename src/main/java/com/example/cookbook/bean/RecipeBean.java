@@ -1,16 +1,11 @@
 package com.example.cookbook.bean;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import javax.persistence.*;
 import java.util.Objects;
-import java.util.Set;
-import java.util.TreeSet;
 
 @Entity
 @Table(name = "recipe")
-@JsonIgnoreProperties({"comments"})
-public class RecipeBean {
+public class RecipeBean implements Comparable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -18,16 +13,16 @@ public class RecipeBean {
     @Column(name = "name", nullable = false, length = 128)
     private String name;
 
-    @Column(name = "description", nullable = false, columnDefinition="VARCHAR(4000)")
+    @Column(name = "description", nullable = false, columnDefinition = "VARCHAR(4000)")
     private String description;
 
     @Column(name = "image", nullable = false, length = 512)
     private String image;
 
-    @Column(name = "ingredients", nullable = false, columnDefinition="VARCHAR(4000)")
+    @Column(name = "ingredients", nullable = false, columnDefinition = "VARCHAR(4000)")
     private String ingredients;
 
-    @Column(name = "instructions", nullable = false,  columnDefinition="VARCHAR(4000)")
+    @Column(name = "instructions", nullable = false, columnDefinition = "VARCHAR(4000)")
     private String instructions;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -41,9 +36,6 @@ public class RecipeBean {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "diet_id")
     private DietBean diet;
-
-    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL}, mappedBy = "recipe")
-    private Set<CommentBean> comments = new TreeSet<>();
 
     public RecipeBean() {
     }
@@ -124,14 +116,6 @@ public class RecipeBean {
         this.user = user;
     }
 
-    public Set<CommentBean> getComments() {
-        return comments;
-    }
-
-    public void setComments(Set<CommentBean> comments) {
-        this.comments = comments;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -146,5 +130,18 @@ public class RecipeBean {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        if (this == o) return 0;
+
+        if (!(o instanceof RecipeBean)) return 0;
+
+        RecipeBean that = (RecipeBean) o;
+
+        if (this.id > that.id) return 1;
+        else if (this.id < that.id) return -1;
+        else return 0;
     }
 }
